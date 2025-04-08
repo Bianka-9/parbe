@@ -14,6 +14,21 @@ public class MainController {
     Stage stage = new Stage();
 
     @FXML
+    public void initialize() {
+        System.out.println("initialize");
+        App._stage.setOnCloseRequest(event -> {
+            System.out.println("onCloseRequest...");
+
+            StringBuilder content = new StringBuilder();
+            for (String car : carList.getItems()) {
+                content.append(car);
+                content.append(",");
+            }
+            Store.writeCars(content.toString());
+        });
+    }
+
+    @FXML
     public ListView<String> carList;
 
     @FXML
